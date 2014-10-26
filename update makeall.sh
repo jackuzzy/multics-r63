@@ -5,3 +5,4 @@ make target=x32
 make target=ppc-old
 make target=ppc
 make target=mips
+make target=sh4
