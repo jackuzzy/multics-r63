@@ -49,6 +49,14 @@ ifeq ($(target),ppc)
   CFLAGS	= -s -ggdb3 -O2 -DTARGET=3 $(OPTS) -DINOTIFY
   LFLAGS	= $(CFLAGS)
 else
+ifeq ($(target),sh4)
+  CC        = /opt/STM/STLinux-2.4/devkit/sh4/bin/sh4-linux-gcc
+  CXX       = /opt/STM/STLinux-2.4/devkit/sh4/bin/sh4-linux-g++
+  STRIP     = /opt/STM/STLinux-2.4/devkit/sh4/bin/sh4-linux-strip
+  OUTPUT	= sh4/
+  CFLAGS	= -ggdb3 -O2 $(OPTS) -DST_7201  -DST_OSLINUX  -DARCHITECTURE_ST40
+  LFLAGS	= $(CFLAGS)
+else
 ifeq ($(target),win32)
   CC        = i586-mingw32msvc-gcc
   CXX       = i586-mingw32msvc-g++
@@ -63,6 +71,7 @@ else
   OUTPUT	= x/
   CFLAGS	= -ggdb3 -O2 -Wall -I. -DTARGET=2 $(OPTS)
   LFLAGS	= $(CFLAGS)
+endif
 endif
 endif
 endif
@@ -98,4 +107,5 @@ cleanall:
 	$(MAKE) target=ppc clean
 	$(MAKE) target=ppc-old clean
 	$(MAKE) target=mips clean
+	$(MAKE) target=sh4 clean
 
